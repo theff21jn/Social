@@ -1,0 +1,13 @@
+# ปิดการ list directory
+Options -Indexes
+
+# ป้องกันเข้าโฟลเดอร์ระบบโดยตรง
+RedirectMatch 403 ^/?(includes|config|database)/.*$
+
+# ป้องกันการรัน PHP ใน /uploads — จัดการใน uploads/.htaccess แทน
+# (<Directory> ใช้ใน .htaccess ไม่ได้ ต้องอยู่ใน httpd.conf เท่านั้น)
+
+# ส่ง 404 ของ Apache สำหรับไฟล์ .env / .sql / .md
+<FilesMatch "\.(env|sql|md|log)$">
+    Require all denied
+</FilesMatch>
